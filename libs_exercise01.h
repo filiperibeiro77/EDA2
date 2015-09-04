@@ -78,7 +78,8 @@ int inserting_element() {
 /*Definig the mazimun value possible in the vector*/
 int inserting_maximun_element() {
 	int maximun_element = 0;
-	printf("Insira o maior elemento que você deseja que seja possivel estar no vetor: ");
+	printf("Insira o maior elemento que você deseja que seja possivel estar no vetor. ");
+	printf("Esse valor tem que ser maior que o tamanho do vetor: ");
     scanf("%d", &maximun_element);
 
     return maximun_element;	
@@ -147,6 +148,7 @@ int search_element_index(int *vector_test, int size_vector, int value_test) {
 	return -1;
 }
 
+/*indexed search feito with the position of value correspondent in the index's vector*/
 int indexed_search(int *vector_oficial_test, int *vector_index_test, int size_vector, int position_index_test, int value_test) {
 	int i = 0;
 	int inferior_limit = *(vector_index_test+(position_index_test));
@@ -163,10 +165,19 @@ int indexed_search(int *vector_oficial_test, int *vector_index_test, int size_ve
 	return -1;
 }
 
+/*Interpolation method search. only is necessary change values in a formula and magically the approximate
+ value of position is returned*/
 int interpolation_search(int *vector_test, int size_vector, int value_test){
 	int medium = 0;
+	int sup;
+	sup = size_vector -1;
 
-	medium = (size_vector-1)*((value_test - *(vector_test + 0))/(*(vector_test+(size_vector-1)))-*(vector_test+0));
+	if (search_element_vector_oficial(vector_test, size_vector, value_test) == -1) {
+		return -1;
+	}
 
-	return medium;
+	else {
+		medium = sup*(value_test - vector_test[0] )/(vector_test[sup] - vector_test[0]);
+		return medium;
+	}
 }
