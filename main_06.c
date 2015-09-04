@@ -24,13 +24,15 @@ int main(){
 	printf("Insira o elemento que deseja buscar: ");
     scanf("%d", &element);
 
+/*initializing function for calculate a time of processing*/
   	ti = tf = tempo = 0; 
   	timeval tempo_inicio,tempo_fim; 
 	gettimeofday(&tempo_inicio,NULL); 
 
-	result = interpolation_search(my_vector, size_my_vector, element);
+	result = interpolation_search(my_vector, size_my_vector, 0, element);
 	printf("O elemento se encontra aproximadamente na posição %d\n", result);
 
+/*finallilizing function for calculate a time of processing*/
 	gettimeofday(&tempo_fim,NULL); 
 	tf = (double)tempo_fim.tv_usec + ((double)tempo_fim.tv_sec * (1000000.0)); 
     ti = (double)tempo_inicio.tv_usec + ((double)tempo_inicio.tv_sec * (1000000.0)); 

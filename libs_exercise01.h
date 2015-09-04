@@ -167,9 +167,9 @@ int indexed_search(int *vector_oficial_test, int *vector_index_test, int size_ve
 
 /*Interpolation method search. only is necessary change values in a formula and magically the approximate
  value of position is returned*/
-int interpolation_search(int *vector_test, int size_vector, int value_test){
+int interpolation_search(int *vector_test, int size_vector, int smallest_positon, int value_test){
 	int medium = 0;
-	int sup;
+	int sup = 0;
 	sup = size_vector -1;
 
 	if (search_element_vector_oficial(vector_test, size_vector, value_test) == -1) {
@@ -177,7 +177,31 @@ int interpolation_search(int *vector_test, int size_vector, int value_test){
 	}
 
 	else {
-		medium = sup*(value_test - vector_test[0] )/(vector_test[sup] - vector_test[0]);
+		medium = smallest_positon + (sup - smallest_positon)*(value_test - vector_test[0] )/(vector_test[sup] - vector_test[0]);
 		return medium;
 	}
+}
+
+int binary_search(int *vector_test, int size_vector, int key_search) {
+	int medium = 0;
+	int limit_inf = 0;
+	int limit_sup = size_vector - 1;
+
+	medium = size_vector/2;
+	
+	while (limit_inf <= limit_sup) {
+		medium = (limit_sup + limit_inf)/2;
+		if(key_search == *(vector_test+medium)) {
+			return medium;
+		}
+
+		else if (key_search == *(vector_test+medium)) {
+			limit_sup = medium - 1;
+		}
+
+		else {
+			limit_inf = medium + 1;
+		}
+	}
+	return -1;
 }
